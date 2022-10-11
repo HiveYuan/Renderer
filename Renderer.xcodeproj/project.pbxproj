@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		503C06A028F5131000D7C17B /* tgaimage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503C069E28F5131000D7C17B /* tgaimage.cpp */; };
 		508D6DA928F50D070052B61E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 508D6DA828F50D070052B61E /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		503C069E28F5131000D7C17B /* tgaimage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tgaimage.cpp; sourceTree = "<group>"; };
+		503C069F28F5131000D7C17B /* tgaimage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tgaimage.h; sourceTree = "<group>"; };
 		508D6DA528F50D070052B61E /* Renderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Renderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		508D6DA828F50D070052B61E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				508D6DA828F50D070052B61E /* main.cpp */,
+				503C069E28F5131000D7C17B /* tgaimage.cpp */,
+				503C069F28F5131000D7C17B /* tgaimage.h */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				503C06A028F5131000D7C17B /* tgaimage.cpp in Sources */,
 				508D6DA928F50D070052B61E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
