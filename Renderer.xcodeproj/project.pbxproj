@@ -11,6 +11,7 @@
 		503C06A328F519E400D7C17B /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503C06A128F519E400D7C17B /* geometry.cpp */; };
 		508D6DA928F50D070052B61E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 508D6DA828F50D070052B61E /* main.cpp */; };
 		50E7316E28F5FF3900B6BB80 /* math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E7316C28F5FF3900B6BB80 /* math.cpp */; };
+		50E7317128F617B900B6BB80 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E7316F28F617B900B6BB80 /* model.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,8 @@
 		50E7316B28F5FED300B6BB80 /* african_head.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = african_head.obj; sourceTree = "<group>"; };
 		50E7316C28F5FF3900B6BB80 /* math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = math.cpp; sourceTree = "<group>"; };
 		50E7316D28F5FF3900B6BB80 /* math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = math.hpp; sourceTree = "<group>"; };
+		50E7316F28F617B900B6BB80 /* model.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
+		50E7317028F617B900B6BB80 /* model.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = model.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,8 @@
 			children = (
 				50E7316A28F5FD3F00B6BB80 /* obj */,
 				508D6DA828F50D070052B61E /* main.cpp */,
+				50E7316F28F617B900B6BB80 /* model.cpp */,
+				50E7317028F617B900B6BB80 /* model.hpp */,
 				503C06A128F519E400D7C17B /* geometry.cpp */,
 				50E7316C28F5FF3900B6BB80 /* math.cpp */,
 				50E7316D28F5FF3900B6BB80 /* math.hpp */,
@@ -144,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E7317128F617B900B6BB80 /* model.cpp in Sources */,
 				503C06A028F5131000D7C17B /* tgaimage.cpp in Sources */,
 				508D6DA928F50D070052B61E /* main.cpp in Sources */,
 				503C06A328F519E400D7C17B /* geometry.cpp in Sources */,
