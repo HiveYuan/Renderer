@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		503C06A028F5131000D7C17B /* tgaimage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503C069E28F5131000D7C17B /* tgaimage.cpp */; };
+		503C06A328F519E400D7C17B /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503C06A128F519E400D7C17B /* geometry.cpp */; };
 		508D6DA928F50D070052B61E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 508D6DA828F50D070052B61E /* main.cpp */; };
+		50E7316E28F5FF3900B6BB80 /* math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E7316C28F5FF3900B6BB80 /* math.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +28,13 @@
 /* Begin PBXFileReference section */
 		503C069E28F5131000D7C17B /* tgaimage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tgaimage.cpp; sourceTree = "<group>"; };
 		503C069F28F5131000D7C17B /* tgaimage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tgaimage.h; sourceTree = "<group>"; };
+		503C06A128F519E400D7C17B /* geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cpp; sourceTree = "<group>"; };
+		503C06A228F519E400D7C17B /* geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = geometry.hpp; sourceTree = "<group>"; };
 		508D6DA528F50D070052B61E /* Renderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Renderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		508D6DA828F50D070052B61E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		50E7316B28F5FED300B6BB80 /* african_head.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = african_head.obj; sourceTree = "<group>"; };
+		50E7316C28F5FF3900B6BB80 /* math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = math.cpp; sourceTree = "<group>"; };
+		50E7316D28F5FF3900B6BB80 /* math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = math.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +67,24 @@
 		508D6DA728F50D070052B61E /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				50E7316A28F5FD3F00B6BB80 /* obj */,
 				508D6DA828F50D070052B61E /* main.cpp */,
+				503C06A128F519E400D7C17B /* geometry.cpp */,
+				50E7316C28F5FF3900B6BB80 /* math.cpp */,
+				50E7316D28F5FF3900B6BB80 /* math.hpp */,
+				503C06A228F519E400D7C17B /* geometry.hpp */,
 				503C069E28F5131000D7C17B /* tgaimage.cpp */,
 				503C069F28F5131000D7C17B /* tgaimage.h */,
 			);
 			path = Renderer;
+			sourceTree = "<group>";
+		};
+		50E7316A28F5FD3F00B6BB80 /* obj */ = {
+			isa = PBXGroup;
+			children = (
+				50E7316B28F5FED300B6BB80 /* african_head.obj */,
+			);
+			path = obj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +146,8 @@
 			files = (
 				503C06A028F5131000D7C17B /* tgaimage.cpp in Sources */,
 				508D6DA928F50D070052B61E /* main.cpp in Sources */,
+				503C06A328F519E400D7C17B /* geometry.cpp in Sources */,
+				50E7316E28F5FF3900B6BB80 /* math.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
