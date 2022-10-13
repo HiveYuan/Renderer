@@ -8,7 +8,7 @@
 #include "geometry.hpp"
 #include "tgaimage.h"
 
-void line(int x0, int y0, int x1, int y1, TGAImage& image, const TGAColor& color)
+void line2D(int x0, int y0, int x1, int y1, TGAImage& image, const TGAColor& color)
 {
     // steep check
     bool steep = false;
@@ -49,4 +49,95 @@ void line(int x0, int y0, int x1, int y1, TGAImage& image, const TGAColor& color
             error -= dx * 2;
         }
     }
+}
+
+/* old school method
+ * for each line, get left, right bound by interpolation
+ * then color the pixel between left and right
+ */
+void triangleByInterpolate2D(Vec2i v0, Vec2i v1, Vec2i v2, TGAImage& image, TGAColor color)
+{
+    //sort vertices in ascending order by y coordinates
+    if(v0.y > v1.y) std::swap(v0, v1);
+    if(v0.y > v2.y) std::swap(v0, v2);
+    if(v1.y > v2.y) std::swap(v1, v2);
+    
+//    line2D(v0.x, v0.y, v1.x, v1.y, image, color);
+//    line2D(v2.x, v2.y, v1.x, v1.y, image, color);
+//    line2D(v0.x, v0.y, v2.x, v2.y, image, color);
+    // horizontal sweepline
+    
+    // upper half of triangle
+    for(int y = v0.y; y < v1.y; ++y)
+    {
+        // interpolate to get left,right bound
+        float t = (y - v0.y) / (float)(std::abs(v1.y - v0.y) == 0? 1 : (v1.y - v0.y)); // in case divided by 0!
+        float left = v0.x * (1 - t) + v1.x * t;
+        t = (y - v0.y) / (float)(v2.y - v0.y);
+        float right = v0.x * (1 - t) + v2.x * t;
+        if(left > right) std::swap(left, right);
+        
+        // coloring pixels in triangle
+        for (int x = std::ceil(left); x < right; ++x) {
+            image.set(x, y, color);
+        }
+    }
+    
+    // lower half of triangle
+    for(int y = v1.y; y <= v2.y; ++y)
+    {
+        // interpolate to get left,right bound
+        float t = (y - v1.y) / (float)(std::abs(v2.y - v1.y) == 0? 1 : (v2.y - v1.y)); // in case divided by 0!
+        float left = v1.x * (1 - t) + v2.x * t;
+        t = (y - v0.y) / (float)(v2.y - v0.y);
+        float right = v0.x * (1 - t) + v2.x * t;
+        if(left > right) std::swap(left, right);
+        
+        // coloring pixels in triangle
+        for (int x =ceil(left); x < right; ++x) {
+            image.set(x, y, color);
+        }
+    }
+}
+
+void triangle2D(Vec2i* vertices, TGAImage& image, TGAColor color)
+{
+//    line2D(vertices[0].x, vertices[0].y, vertices[1].x, vertices[1].y, image, color);
+//    line2D(vertices[2].x, vertices[2].y, vertices[1].x, vertices[1].y, image, color);
+//    line2D(vertices[0].x, vertices[0].y, vertices[2].x, vertices[2].y, image, color);
+    
+    // get bounding box of triangle
+    Vec2i bboxmin = Vec2i(image.width() - 1, image.height() - 1);
+    Vec2i bboxmax = Vec2i(0, 0);
+    
+    for(int i = 0; i < 3; ++i)
+    {
+        bboxmin.x = std::max(0, std::min(bboxmin.x, vertices[i].x));
+        bboxmin.y = std::max(0, std::min(bboxmin.y, vertices[i].y));
+        
+        bboxmax.x = std::min(image.width() - 1, std::max(bboxmax.x, vertices[i].x));
+        bboxmax.y = std::min(image.height() - 1, std::max(bboxmax.y, vertices[i].y));
+    }
+    
+    // sweep the bounding box
+    for(int x = bboxmin.x; x <= bboxmax.x; ++x)
+    {
+        for(int y = bboxmin.y; y < bboxmax.y; ++y)
+        {
+            Vec3f bcCoord = barycentric2D(vertices, Vec2i(x, y));
+            if(bcCoord.x < 0 || bcCoord.y < 0 || bcCoord.z < 0) continue;
+            image.set(x, y, color);
+        }
+    }
+}
+
+Vec3f barycentric2D(Vec2i *pts, const Vec2i& P)
+{
+    Vec3f v = Vec3f(pts[1].x - pts[0].x, pts[2].x - pts[0].x, pts[0].x - P.x) ^ Vec3f(pts[1].y - pts[0].y, pts[2].y - pts[0].y, pts[0].y - P.y);
+    
+//   // degenerate case: P is on boundary of triagnle
+    if(std::abs(v.z) < 1e-6)
+        // then return any Vec with at least one negative component
+        return Vec3f(-1, -1, -1);
+    return Vec3f(1.0 - (v.x + v.y) / v.z, v.x / v.z, v.y / v.z);
 }
