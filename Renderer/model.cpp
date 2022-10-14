@@ -38,9 +38,9 @@ Model::Model(const char* filename) : mVertices(), mFaces()
         }else if(!line.compare(0, 2, "f ")){
             iss >> trash;
             std::vector<int> f;
-            int itrash, idx;
+            int idx_vt, itrash, idx;
             // read vertex index of a face
-            while(iss >> idx >> trash >> itrash >> trash >> itrash)
+            while(iss >> idx >> trash >> idx_vt >> trash >> itrash)
                 f.emplace_back(--idx);
             mFaces.emplace_back(f);
         }

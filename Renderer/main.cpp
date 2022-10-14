@@ -59,16 +59,18 @@ void testHeadMesh()
     Model* head = new Model("obj/african_head.obj");
     int nf = head->getFacesCnt();
     Vec3f light_dir(0, 0, -1);
+    std::vector<float> zBuffer(image_bc.width()*image_bc.height(), std::numeric_limits<float>::min());
+    
     for(int i = 0; i < nf; ++i)
     {
         std::vector<int> face = head->getFace(i);
-        Vec2i screenVertices[3];
+        Vec3f screenVertices[3];
         Vec3f worldVertices[3];
         for(int j = 0; j < 3; ++j)
         {
             Vec3f v = head->getVertex(face[j]);
             worldVertices[j] = v;
-            screenVertices[j] = Vec2i((v.x + 1.0) * width / 2.0, (v.y + 1.0) * height / 2.0);
+            screenVertices[j] = Vec3f((v.x + 1.0) * width / 2.0, (v.y + 1.0) * height / 2.0, (v.z + 1.0) * width / 2.0);
         }
         Vec3f normal = ((worldVertices[2] - worldVertices[0]) ^ (worldVertices[1] - worldVertices[0])).normalize();
         float intensity = normal * light_dir;
@@ -76,12 +78,10 @@ void testHeadMesh()
         if(intensity > 0)
         {
             TGAColor color(intensity * 255, intensity * 255, intensity * 255);
-            triangle2D(screenVertices, image_bc, color);
-            triangleByInterpolate2D(screenVertices[0], screenVertices[1], screenVertices[2], image_intp, color);
+            triangle2D(screenVertices, zBuffer, image_bc, color);
         }
     }
-    image_bc.write_tga_file("head_mesh_bc.tga");
-    image_intp.write_tga_file("head_mesh_intp.tga");
+    image_bc.write_tga_file("head_mesh_bc_zbuffer.tga");
     delete head;
 }
 
@@ -96,18 +96,5 @@ void testTriangleByInterpolate2D()
     triangleByInterpolate2D(t1[0], t1[1], t1[2], image, white);
     triangleByInterpolate2D(t2[0], t2[1], t2[2], image, green);
     image.write_tga_file("trianglesByInterPolate2D.tga");
-}
-
-void testTriangleByBCCoords2D()
-{
-    TGAImage image(width, height, TGAImage::RGB);
-    
-    Vec2i t0[3] = {Vec2i(10, 70),   Vec2i(50, 160),  Vec2i(70, 80)};
-    Vec2i t1[3] = {Vec2i(180, 50),  Vec2i(150, 1),   Vec2i(70, 180)};
-    Vec2i t2[3] = {Vec2i(180, 150), Vec2i(120, 160), Vec2i(130, 180)};
-    triangle2D(t0, image, red);
-    triangle2D(t1, image, white);
-    triangle2D(t2, image, green);
-    image.write_tga_file("triangleByBCCoords2D.tga");
 }
 

@@ -27,6 +27,7 @@ struct Vec2 {
     inline Vec2<T> operator-(float f) const { return Vec2<T>(x - f, y - f);}
     inline Vec2<T> operator*(float f) const { return Vec2<T>(x * f, y * f);}
     inline Vec2<T> operator/(float f) const { return Vec2<T>(x / f, y / f);}
+    inline T operator[](int i) const { return mRawData[i]; }
 
     inline Vec2<T> operator+(const Vec2<T>& V) const { return Vec2<T>(x + V.x, y + V.y);}
     inline Vec2<T> operator-(const Vec2<T>& V) const { return Vec2<T>(x - V.x, y - V.y);}
@@ -58,6 +59,7 @@ struct Vec3 {
     inline Vec3<T> operator-(const Vec3<T>& V) const { return Vec3<T>(x - V.x, y - V.y, z - V.z);}
     inline T operator*(const Vec3<T>& V) const { return x * V.x + y * V.y + z * V.z;}
     inline Vec3<T> operator^(const Vec3<T>& V) const { return Vec3<T>(y * V.z - z  * V.y, z * V.x - x * V.z, x * V.y - y * V.x);}
+    inline T operator[](int i) const { return mRawData[i]; }
     
     inline T dot(const Vec3<T>& V) const { return (*this) * V; }
     inline Vec3<T> cross(const Vec3<T> V) const { return (*this) ^ V; }

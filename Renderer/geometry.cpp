@@ -100,23 +100,19 @@ void triangleByInterpolate2D(Vec2i v0, Vec2i v1, Vec2i v2, TGAImage& image, TGAC
     }
 }
 
-void triangle2D(Vec2i* vertices, TGAImage& image, TGAColor color)
+void triangle2D(Vec3f* vertices, std::vector<float>& zBuffer, TGAImage& image, TGAColor color)
 {
-//    line2D(vertices[0].x, vertices[0].y, vertices[1].x, vertices[1].y, image, color);
-//    line2D(vertices[2].x, vertices[2].y, vertices[1].x, vertices[1].y, image, color);
-//    line2D(vertices[0].x, vertices[0].y, vertices[2].x, vertices[2].y, image, color);
-    
     // get bounding box of triangle
-    Vec2i bboxmin = Vec2i(image.width() - 1, image.height() - 1);
-    Vec2i bboxmax = Vec2i(0, 0);
+    Vec2f bboxmin = Vec2f(image.width() - 1, image.height() - 1);
+    Vec2f bboxmax = Vec2f(0.0, 0.0);
     
     for(int i = 0; i < 3; ++i)
     {
-        bboxmin.x = std::max(0, std::min(bboxmin.x, vertices[i].x));
-        bboxmin.y = std::max(0, std::min(bboxmin.y, vertices[i].y));
+        bboxmin.x = std::max(0.0f, std::min(bboxmin.x, vertices[i].x));
+        bboxmin.y = std::max(0.0f, std::min(bboxmin.y, vertices[i].y));
         
-        bboxmax.x = std::min(image.width() - 1, std::max(bboxmax.x, vertices[i].x));
-        bboxmax.y = std::min(image.height() - 1, std::max(bboxmax.y, vertices[i].y));
+        bboxmax.x = std::min(float(image.width() - 1), std::max(bboxmax.x, vertices[i].x));
+        bboxmax.y = std::min(float(image.height() - 1), std::max(bboxmax.y, vertices[i].y));
     }
     
     // sweep the bounding box
@@ -126,12 +122,18 @@ void triangle2D(Vec2i* vertices, TGAImage& image, TGAColor color)
         {
             Vec3f bcCoord = barycentric2D(vertices, Vec2i(x, y));
             if(bcCoord.x < 0 || bcCoord.y < 0 || bcCoord.z < 0) continue;
-            image.set(x, y, color);
+            float curZ = 0;
+            for(int i = 0; i < 3; ++i) curZ += bcCoord[i] * vertices[i].z;
+            if(curZ > zBuffer[x + y * image.width()])
+            {
+                zBuffer[x + y * image.width()] = curZ;
+                image.set(x, y, color);
+            }
         }
     }
 }
 
-Vec3f barycentric2D(Vec2i *pts, const Vec2i& P)
+Vec3f barycentric2D(Vec3f *pts, const Vec2i& P)
 {
     Vec3f v = Vec3f(pts[1].x - pts[0].x, pts[2].x - pts[0].x, pts[0].x - P.x) ^ Vec3f(pts[1].y - pts[0].y, pts[2].y - pts[0].y, pts[0].y - P.y);
     

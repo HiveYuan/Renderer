@@ -30,9 +30,9 @@
             filePath = "Renderer/geometry.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "triangle2D(vertices, image, color)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "triangle2D(vertices, zBuffer, image, color)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +46,9 @@
             filePath = "Renderer/geometry.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "triangle2D(vertices, image, color)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "triangle2D(vertices, zBuffer, image, color)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "Renderer/geometry.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "triangle2D(vertices, image, color)"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "triangle2D(vertices, zBuffer, image, color)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "Renderer/geometry.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "triangle2D(vertices, image, color)"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "triangle2D(vertices, zBuffer, image, color)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -145,8 +145,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -161,8 +161,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -177,8 +177,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -193,8 +193,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
