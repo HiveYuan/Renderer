@@ -30,6 +30,7 @@ struct TGAColor {
         for (int i=bpp; i--; bgra[i] = p[i]);
     }
     std::uint8_t& operator[](const int i) { return bgra[i]; }
+    inline TGAColor operator*(const float scale) { return TGAColor(bgra[0] * scale, bgra[1] * scale, bgra[2] * scale, bgra[3] * scale); }
 };
 
 struct TGAImage {

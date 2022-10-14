@@ -14,14 +14,21 @@
 class Model {
 private:
     std::vector<Vec3f> mVertices;
-    std::vector<std::vector<int>> mFaces;
+    std::vector<Vec3f> mVtextures;
+    std::vector<Vec3f> mVnormals;
+    std::vector<std::vector<Vec3f>> mFaces;
 public:
     Model(const char* filename);
     ~Model();
     int getVertsCnt() const;
+    int getVtCnt() const;
+    int getVnCnt() const;
     int getFacesCnt() const;
+    
     Vec3f getVertex(int i) const;
-    std::vector<int> getFace(int i) const;
+    Vec3f getVtexture(int i) const;
+    Vec3f getVnormal(int i) const;
+    std::vector<Vec3f> getFace(int i) const;
 };
 
 #endif /* model_hpp */

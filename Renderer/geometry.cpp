@@ -100,7 +100,7 @@ void triangleByInterpolate2D(Vec2i v0, Vec2i v1, Vec2i v2, TGAImage& image, TGAC
     }
 }
 
-void triangle2D(Vec3f* vertices, std::vector<float>& zBuffer, TGAImage& image, TGAColor color)
+void triangle2D(Vec3f* vertices, Vec3f* texCoords, TGAImage& image_texture, std::vector<float>& zBuffer, TGAImage& image, float col_intensity)
 {
     // get bounding box of triangle
     Vec2f bboxmin = Vec2f(image.width() - 1, image.height() - 1);
@@ -126,6 +126,14 @@ void triangle2D(Vec3f* vertices, std::vector<float>& zBuffer, TGAImage& image, T
             for(int i = 0; i < 3; ++i) curZ += bcCoord[i] * vertices[i].z;
             if(curZ > zBuffer[x + y * image.width()])
             {
+                // interpolate texCoords
+                float texX = 0, texY = 0;
+                for(int i = 0; i < 3; ++i)
+                {
+                    texX += bcCoord[i] * texCoords[i].x;
+                    texY += bcCoord[i] * texCoords[i].y;
+                }
+                TGAColor color = image_texture.get(texX * image_texture.width(), texY * image_texture.height());
                 zBuffer[x + y * image.width()] = curZ;
                 image.set(x, y, color);
             }
