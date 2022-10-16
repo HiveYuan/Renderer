@@ -27,6 +27,7 @@ void testHeadMesh();
 Vec3f matrixToVec3f(const Matrix& m);
 Matrix vec3ToMatrix(const Vec3f& v);
 Matrix viewPort(int x, int y, int w, int h);
+Matrix lookAt(Vec3f eye, Vec3f center, Vec3f globalUp);
 
 int main(int argc, char** argv) {
 //    Matrix a(4, 4);
@@ -72,6 +73,12 @@ void testHeadMesh()
     int nf = head->getFacesCnt();
     Vec3f light_dir(0, 0, -1);
     std::vector<float> zBuffer(image_bc.width()*image_bc.height(), std::numeric_limits<float>::min());
+    
+    Matrix mView = lookAt(camera, Vec3f(0, 0, 0), Vec3f(0, 1, 0));
+    Matrix projection = Matrix::identity(4);
+    projection[3][2] = -1.0 / camera.z;
+    Matrix viewport = viewPort(width / 8.0, height / 8.0, width * 0.75, height * 0.75);
+    
     // for each face (triangle)
     for(int i = 0; i < nf; ++i)
     {
@@ -81,14 +88,11 @@ void testHeadMesh()
         Vec3f vertexNormals[3];
         Vec3f worldVertices[3]; // for face culling
         // for each vertex of the face
-        Matrix projection = Matrix::identity(4);
-        projection[3][2] = -1.0 / camera.z;
-        Matrix viewport = viewPort(width / 8.0, height / 8.0, width * 0.75, height * 0.75);
         for(int j = 0; j < 3; ++j)
         {
             Vec3f v = head->getVertex(face[j].ivert);
             worldVertices[j] = v;
-            screenVertices[j] =  matrixToVec3f(viewport * projection * vec3ToMatrix(v));
+            screenVertices[j] =  matrixToVec3f(viewport * projection * mView * vec3ToMatrix(v));
             vertexTexCoords[j] = head->getVtexture(face[j].iuv);
             vertexNormals[j] = head->getVertex(face[j].inorm);
         }
@@ -135,6 +139,7 @@ Matrix vec3ToMatrix(const Vec3f& v)
     return m;
 }
 
+// cube [-1,1]*[-1,1]*[-1,1] is mapped onto the screen cube [x,x+w]*[y,y+h]*[0,d]
 Matrix viewPort(int x, int y, int w, int h)
 {
     Matrix m = Matrix::identity(4);
@@ -147,4 +152,25 @@ Matrix viewPort(int x, int y, int w, int h)
     m[2][2] *= depth / 2.0;
     
     return m;
+}
+
+
+Matrix lookAt(Vec3f eye, Vec3f center, Vec3f globalUp)
+{
+    Matrix ans = Matrix::identity();
+    
+    Vec3f z_cam = (eye - center).normalize();
+    Vec3f x_cam = (globalUp ^ z_cam).normalize();
+    Vec3f y_cam = (z_cam ^ x_cam).normalize();
+    
+    for(int i = 0; i < 3; ++i)
+    {
+        ans[0][i] = x_cam[i];
+        ans[1][i] = y_cam[i];
+        ans[2][i] = z_cam[i];
+        
+        ans[i][3] = -center[i];
+    }
+    
+    return ans;
 }
