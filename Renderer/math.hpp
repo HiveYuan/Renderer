@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <cmath>
+#include <vector>
+#include <cassert>
 
 template<class T>
 struct Vec2 {
@@ -22,7 +24,16 @@ struct Vec2 {
     
     Vec2():x(0),y(0) {}
     Vec2(T _x, T _y):x(_x), y(_y) {}
+    template <class u> Vec2<T>(const Vec2<u> &v);
     
+    Vec2<T>& operator=(const Vec2<T>& v) {
+        if(this != &v)
+        {
+            this->x = v.x;
+            this->y = v.y;
+        }
+        return *this;
+    }
     inline Vec2<T> operator+(float f) const { return Vec2<T>(x + f, y + f);}
     inline Vec2<T> operator-(float f) const { return Vec2<T>(x - f, y - f);}
     inline Vec2<T> operator*(float f) const { return Vec2<T>(x * f, y * f);}
@@ -47,8 +58,19 @@ struct Vec3 {
         T mRawData[3];
     };
     
-    Vec3():x(0),y(0), z(0) {}
+    Vec3():x(T()),y(T()), z(T()) {}
     Vec3(T _x, T _y, T _z):x(_x), y(_y), z(_z) {}
+    template <class u> Vec3<T>(const Vec3<u> &v);
+    
+    Vec3<T>& operator=(const Vec3<T>& v) {
+        if(this != &v)
+        {
+            this->x = v.x;
+            this->y = v.y;
+            this->z = v.z;
+        }
+        return *this;
+    }
     
     inline Vec3<T> operator+(float f) const { return Vec3<T>(x + f, y + f, z + f);}
     inline Vec3<T> operator-(float f) const { return Vec3<T>(x - f, y - f, z - f);}
@@ -90,5 +112,31 @@ std::ostream& operator<<(std::ostream& s, const Vec3<T>& V)
     s << "(" << V.x << ", " << V.y << ", " << V.z << ")";
     return s;
 }
+
+const int DEFAULT_DIMENSION = 4;
+
+class Matrix {
+private:
+    std::vector<std::vector<float>> mElements;
+    int mRows, mCols;
+public:
+    Matrix(int r = DEFAULT_DIMENSION, int c = DEFAULT_DIMENSION);
+    ~Matrix();
+    
+    inline int getnRows() const { return mRows; };
+    inline int getnCols() const { return mCols; };
+    
+    inline float getElement(int r, int c) const { return mElements[r][c]; }
+    
+    static Matrix identity(int d = DEFAULT_DIMENSION);
+    
+    std::vector<float>& operator[](const int i) { return mElements[i]; };
+    Matrix operator*(const Matrix& b);
+//    template<typename T> Matrix operator*(const Vec3<T> v);
+    Matrix transpose();
+    Matrix inverse();
+    
+    friend std::ostream& operator<<(std::ostream& s, const Matrix& m);
+};
 
 #endif /* math_hpp */

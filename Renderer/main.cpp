@@ -16,13 +16,22 @@ const TGAColor red      = TGAColor(255, 0,   0,   255);
 const TGAColor green    = TGAColor(0, 255,   0,   255);
 const int width  = 800;
 const int height = 800;
+const int depth = 255;
+
+Vec3f camera(0, 0, 3);
 
 void testHeadWireFrame();
 void testTriangleByInterpolate2D();
 void testTriangleByBCCoords2D();
 void testHeadMesh();
+Vec3f matrixToVec3f(const Matrix& m);
+Matrix vec3ToMatrix(const Vec3f& v);
+Matrix viewPort(int x, int y, int w, int h);
 
 int main(int argc, char** argv) {
+//    Matrix a(4, 4);
+//    Matrix b = Matrix::identity(4);
+//    std::cout << b;
     testHeadMesh();
     return 0;
 }
@@ -72,11 +81,14 @@ void testHeadMesh()
         Vec3f vertexNormals[3];
         Vec3f worldVertices[3]; // for face culling
         // for each vertex of the face
+        Matrix projection = Matrix::identity(4);
+        projection[3][2] = -1.0 / camera.z;
+        Matrix viewport = viewPort(width / 8.0, height / 8.0, width * 0.75, height * 0.75);
         for(int j = 0; j < 3; ++j)
         {
             Vec3f v = head->getVertex(face[j].ivert);
             worldVertices[j] = v;
-            screenVertices[j] = Vec3f((v.x + 1.0) * width / 2.0, (v.y + 1.0) * height / 2.0, (v.z + 1.0) * width / 2.0);
+            screenVertices[j] =  matrixToVec3f(viewport * projection * vec3ToMatrix(v));
             vertexTexCoords[j] = head->getVtexture(face[j].iuv);
             vertexNormals[j] = head->getVertex(face[j].inorm);
         }
@@ -85,7 +97,8 @@ void testHeadMesh()
         // face culling
         if(intensity > 0)
         {
-            triangle2D(screenVertices, vertexTexCoords, image_texture, zBuffer, image_bc, intensity);
+//            std::cout << intensity << std::endl;
+            triangle2D(screenVertices, vertexTexCoords, vertexNormals, light_dir, image_texture, image_bc, zBuffer, intensity);
         }
     }
     image_bc.write_tga_file("head_mesh_bc_zbuffer.tga");
@@ -105,3 +118,33 @@ void testTriangleByInterpolate2D()
     image.write_tga_file("trianglesByInterPolate2D.tga");
 }
 
+Vec3f matrixToVec3f(const Matrix& m)
+{
+    assert(m.getnRows() >= 3 && m.getnCols() == 1);
+    float z = m.getElement(3, 0);
+    return Vec3f(m.getElement(0, 0) / z, m.getElement(1, 0) / z, m.getElement(2, 0) / z);
+}
+
+Matrix vec3ToMatrix(const Vec3f& v)
+{
+    Matrix m(4, 1);
+    m[0][0] = v.x;
+    m[1][0] = v.y;
+    m[2][0] = v.z;
+    m[3][0] = 1;
+    return m;
+}
+
+Matrix viewPort(int x, int y, int w, int h)
+{
+    Matrix m = Matrix::identity(4);
+    m[0][3] = x + w / 2.0;
+    m[1][3] = y + h / 2.0;
+    m[2][3] = depth / 2.0;
+    
+    m[0][0] *= w / 2.0;
+    m[1][1] *= h / 2.0;
+    m[2][2] *= depth / 2.0;
+    
+    return m;
+}

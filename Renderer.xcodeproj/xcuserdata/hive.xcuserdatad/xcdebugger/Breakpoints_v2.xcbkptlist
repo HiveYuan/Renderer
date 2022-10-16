@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
             endingLineNumber = "119"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
             endingLineNumber = "110"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
             endingLineNumber = "111"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -80,7 +80,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
             endingLineNumber = "123"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -145,8 +145,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -161,8 +161,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -177,8 +177,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -194,9 +194,9 @@
             filePath = "Renderer/geometry.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -212,7 +212,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
             endingLineNumber = "104"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -228,7 +228,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -242,9 +242,9 @@
             filePath = "Renderer/geometry.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "triangle2D(vertices, texCoords, image_texture, zBuffer, image, col_intensity)"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "triangle2D(vertices, texCoords, normals, light_dir, image_texture, image, zBuffer, col_intensity)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -274,8 +274,8 @@
             filePath = "Renderer/main.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "testHeadMesh()"
             landmarkType = "9">
          </BreakpointContent>
@@ -325,6 +325,22 @@
             startingLineNumber = "51"
             endingLineNumber = "51"
             landmarkName = "Model::Model(filename)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A2456B0-18F5-4D74-8DFF-88F9F4952876"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Renderer/math.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "Matrix::identity(d)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
