@@ -165,10 +165,12 @@ Matrix lookAt(Vec3f eye, Vec3f center, Vec3f globalUp)
     
     for(int i = 0; i < 3; ++i)
     {
+        // affine
         ans[0][i] = x_cam[i];
         ans[1][i] = y_cam[i];
         ans[2][i] = z_cam[i];
         
+        // translate
         ans[i][3] = -center[i];
     }
     
